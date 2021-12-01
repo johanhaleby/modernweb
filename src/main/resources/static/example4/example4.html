@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/thymeleaf/layout.html}"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Example 3</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <form th:action="@{|/examples/3/${user.id}|}" th:object="${user}" method="post">
+                    <div class="form-group">
+                        <label class="control-label" th:for="firstName">Firstname</label>
+                        <input class="form-control" th:field="*{firstName}" type="text"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" th:for="secondName">Lastname</label>
+                        <input class="form-control" th:field="*{lastName}" type="text"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" th:for="email">Email</label>
+                        <input class="form-control" th:field="*{email}" type="email"/>
+                    </div>
+                    <div class="form-group submit-cancel">
+                        <input class="btn btn-primary" type="submit" value="Save changes"/>
+                        <a class="btn btn-default btn-cancel" th:href="@{|/examples/3/${user.id}|}">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
