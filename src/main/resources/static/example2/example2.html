@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/thymeleaf/layout.html}"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/layout ">
+<head>
+    <title>Example 2</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <!--/*@thymesVar id="user" type="com.haleby.htmx.htmxexample.common.User"*/-->
+    <div class="container">
+        <div>
+            <label>First Name</label>:
+            <span th:text="${user.firstName}"></span>
+        </div>
+        <div>
+            <label>Last Name</label>:
+            <span th:text="${user.lastName}"></span>
+        </div>
+        <div>
+            <label>Email</label>:
+            <span th:text="${user.email}"></span>
+        </div>
+    </div>
+</section>
+</body>
+</html>

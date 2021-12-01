@@ -14,7 +14,7 @@
     <name>htmx-example</name>
     <description>htmx-example</description>
     <properties>
-        <java.version>17</java.version>
+        <java.version>16</java.version>
         <kotlin.version>1.6.0</kotlin.version>
         <testcontainers.version>1.16.0</testcontainers.version>
     </properties>
@@ -54,16 +54,38 @@
             <version>1.0.2</version>
         </dependency>
 
+        <!-- Thymeleaf Layout -->
+        <dependency>
+            <groupId>nz.net.ultraq.thymeleaf</groupId>
+            <artifactId>thymeleaf-layout-dialect</artifactId>
+        </dependency>
+
         <!-- Webjars -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator-core</artifactId> <!-- So that spring finds web jars-->
+        </dependency>
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
             <version>5.1.3</version>
         </dependency>
         <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>webjars-locator-core</artifactId> <!-- So that spring finds web jars-->
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>htmx.org</artifactId>
+            <version>1.6.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>hyperscript.org</artifactId>
+            <version>0.8.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>bootstrap-icons</artifactId>
+            <version>1.7.0</version>
+        </dependency>
+
 
         <!-- Test -->
         <dependency>
