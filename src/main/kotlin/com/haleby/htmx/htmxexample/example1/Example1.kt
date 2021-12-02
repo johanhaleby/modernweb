@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController
  */
 @RequestMapping(path = ["/examples/1"], produces = [MediaType.TEXT_HTML_VALUE])
 @RestController
-class Exampe1 {
+class Example1 {
 
     @GetMapping
     @Language("html")
