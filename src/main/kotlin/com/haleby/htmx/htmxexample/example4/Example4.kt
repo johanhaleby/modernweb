@@ -38,7 +38,7 @@ class Example4(private val userRepository: UserRepository) {
         return "example4/edit-user-form"
     }
 
-    @PostMapping("/{userId}")
+    @PutMapping("/{userId}")
     fun updateUser(model: Model,
                    @PathVariable("userId") id: String,
                    @ModelAttribute("user") userDTO: UserDTO): String {
@@ -47,6 +47,18 @@ class Example4(private val userRepository: UserRepository) {
         userRepository.save(user)
         model.addAttribute("message", "User $id updated")
         return renderTable(model)
+    }
+
+    @Suppress("SpringMVCViewInspection")
+    @PostMapping
+    fun addUser(model: Model, @ModelAttribute("user") userDTO: UserDTO): String {
+        val id = UUID.randomUUID().toString()
+        log.info("Adding new user with id $id")
+        val user = userDTO.toDomain(id)
+        userRepository.save(user)
+        model.addAttribute("users", listOf(user))
+        // Currently, IntelliJ doesn't recognize a Thymeleaf fragment returned in a controller. See https://youtrack.jetbrains.com/issue/IDEA-276625
+        return "example4/users :: user-row"
     }
 
     @DeleteMapping("/{userId}")

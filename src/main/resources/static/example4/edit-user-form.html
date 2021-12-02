@@ -1,6 +1,6 @@
 <!doctype html>
 <div class="row">
-    <form th:attr="hx-post=@{|/examples/4/${user.id}|}" hx-target="body" hx-swap="outerHTML ">
+    <form th:attr="hx-put=@{|/examples/4/${user.id}|}" hx-target="body" hx-swap="outerHTML ">
         <div>
             <div class="form-group">
                 <label for="firstName">First Name</label>
