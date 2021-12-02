@@ -4,6 +4,7 @@ import com.github.javafaker.Faker
 import org.springframework.stereotype.Component
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.ConcurrentMap
+import javax.annotation.PostConstruct
 
 @Component
 class UserRepository {
@@ -23,4 +24,12 @@ class UserRepository {
     }
 
     fun findAll(): List<User> = state.values.toList()
+
+
+    @PostConstruct
+    fun populateUserRepositoryWithRandomData() {
+        repeat(10) {
+            save(random())
+        }
+    }
 }

@@ -70,13 +70,6 @@ class Example4(private val userRepository: UserRepository) {
         return ResponseEntity.ok().build()
     }
 
-    @PostConstruct
-    fun populateUserRepositoryWithRandomData() {
-        repeat(10) {
-            userRepository.save(userRepository.random())
-        }
-    }
-
     @ExceptionHandler
     fun handleException(iae: IllegalArgumentException) = ResponseEntity.notFound().build<Any>()
 
