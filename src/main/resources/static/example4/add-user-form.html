@@ -1,6 +1,7 @@
 <th:block th:fragment="form(target)">
     <!--/*@thymesVar id="target" type="java.lang.String"*/-->
-    <form hx-post="/examples/4" th:attr="hx-target=${target}" hx-swap="beforeend">
+    <form hx-post="/examples/4" th:attr="hx-target=${target}" hx-swap="beforeend"
+          _="on htmx:afterRequest reset() me">
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-1"><label class="control-label" for="firstNameInput">First Name</label></div>
