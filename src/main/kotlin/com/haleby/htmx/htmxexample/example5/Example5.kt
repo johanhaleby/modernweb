@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct
 
 @RequestMapping(path = ["/examples/5"], produces = [MediaType.TEXT_HTML_VALUE])
 @RestController
+// Uses kotlinx-html-jvm (https://github.com/Kotlin/kotlinx.html)
 class Example5(private val userRepository: UserRepository) {
 
     @GetMapping
@@ -40,33 +41,42 @@ class Example5(private val userRepository: UserRepository) {
                 }
                 br
                 h2 { +"Users" }
-                h3 {
-                    +"Search"
-                    span(classes = "htmx-indicator") {
-                        img(src = "/img/bars.svg") { +"Searching..." }
-                    }
-                }
-                input(classes = "form-control", type = text, name = "search") {
-                    placeholder = "Begin Typing To Search Users..."
-                    attributes["hx-post"] = "/examples/5/search"
-                    attributes["hx-trigger"] = "keyup changed delay:500ms"
-                    attributes["hx-target"] = "#search-results"
-                    attributes["hx-indicator"] = ".htmx-indicator"
-
-                }
-
-                table(classes = "table table-striped") {
-                    thead {
-                        tr {
-                            th { +"Firstname" }
-                            th { +"Lastname" }
-                            th { +"Email" }
+                div(classes = "row") {
+                    div(classes = "col-md-11") {
+                        input(classes = "form-control", type = text, name = "search") {
+                            placeholder = "Begin Typing To Search Users..."
+                            attributes["hx-post"] = "/examples/5/search"
+                            attributes["hx-trigger"] = "keyup changed delay:200ms"
+                            attributes["hx-target"] = "#search-results"
+                            attributes["hx-indicator"] = ".htmx-indicator"
                         }
                     }
-                    tbody {
-                        id = "search-results"
-                        unsafe {
-                            raw(search(""))
+                    div(classes = "col-md-1") {
+                        div(classes = "spinner-border htmx-indicator") {
+                            role = "status"
+                            span(classes = "visually-hidden") {
+                                +"Loading..."
+                            }
+                        }
+                    }
+                }
+
+                div(classes = "row") {
+                    div(classes = "col-md-12") {
+                        table(classes = "table table-striped") {
+                            thead {
+                                tr {
+                                    th { +"Firstname" }
+                                    th { +"Lastname" }
+                                    th { +"Email" }
+                                }
+                            }
+                            tbody {
+                                id = "search-results"
+                                unsafe {
+                                    raw(search(""))
+                                }
+                            }
                         }
                     }
                 }
@@ -75,14 +85,12 @@ class Example5(private val userRepository: UserRepository) {
     }.toString()
 
     @PostMapping("/search")
-    fun search(@RequestParam("search") searchString: String): String {
-        val normalizedSearchString = searchString.lowercase()
-        return userRepository.findAll()
-                .filter { (_, firstName, lastName, email) ->
-                    firstName.lowercase().contains(normalizedSearchString) || lastName.lowercase().contains(normalizedSearchString) || email.lowercase().contains(normalizedSearchString)
-                }
-                .joinToString("\n") { (_, firstName, lastName, email) ->
-                    "<tr><td>$firstName</td><td>$lastName</td><td>$email</td></tr>"
-                }
-    }
+    fun search(@RequestParam("search") searchString: String): String =
+            userRepository.findAll()
+                    .filter { (_, firstName, lastName, email) ->
+                        sequenceOf(firstName, lastName, email).any { it.contains(searchString, ignoreCase = true) }
+                    }
+                    .joinToString("\n") { (_, firstName, lastName, email) ->
+                        "<tr><td>$firstName</td><td>$lastName</td><td>$email</td></tr>"
+                    }
 }
