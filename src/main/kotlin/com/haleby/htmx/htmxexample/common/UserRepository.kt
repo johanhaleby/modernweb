@@ -13,8 +13,14 @@ class UserRepository {
 
     fun save(user: User): User = user.also { state[user.id] = it }
 
+    fun delete(id: String) {
+        state.remove(id)
+    }
+
     fun random(): User {
         val faker = Faker.instance()
         return User(faker.idNumber().valid(), faker.name().firstName(), faker.name().lastName(), faker.internet().emailAddress())
     }
+
+    fun findAll(): List<User> = state.values.toList()
 }

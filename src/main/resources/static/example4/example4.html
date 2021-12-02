@@ -3,34 +3,45 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <title>Example 3</title>
+    <title>Example 4</title>
 </head>
 <body>
 <section layout:fragment="content">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <form th:action="@{|/examples/3/${user.id}|}" th:object="${user}" method="post">
-                    <div class="form-group">
-                        <label class="control-label" th:for="firstName">Firstname</label>
-                        <input class="form-control" th:field="*{firstName}" type="text"/>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" th:for="secondName">Lastname</label>
-                        <input class="form-control" th:field="*{lastName}" type="text"/>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" th:for="email">Email</label>
-                        <input class="form-control" th:field="*{email}" type="email"/>
-                    </div>
-                    <div class="form-group submit-cancel">
-                        <input class="btn btn-primary" type="submit" value="Save changes"/>
-                        <a class="btn btn-default btn-cancel" th:href="@{|/examples/3/${user.id}|}">Cancel</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    <!--/*@thymesVar id="user" type="com.haleby.htmx.htmxexample.common.User"*/-->
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}" th:id="|user_${user.id}|">
+            <td>
+                <span id="firstName" th:text="${user.firstName}">Will be replaced by first name</span>
+            </td>
+            <td>
+                <span id="lastName" th:text="${user.lastName}">Will be replaced by last name</span>
+            </td>
+            <td>
+                <span id="email" th:text="${user.email}">Will be replaced by email</span>
+            </td>
+            <td>
+                <button class="btn px-1" th:attr="hx-delete=@{|/examples/4/${user.id}|}" hx-confirm="Are you sure?"
+                        hx-swap="outerHTML" hx-target="closest tr" hx-trigger="click" type="button">
+                    <i class="bi-trash" title="Delete"></i>
+                </button>
+                <button class="btn px-1" th:attr="hx-get=@{|/examples/4/${user.id}|}"
+                        hx-swap="outerHTML" hx-target="closest table" hx-trigger="click"
+                        hx-push-url="true" type="button">
+                    <i class="bi-pencil-square" title="Edit"></i>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </section>
 </body>
 </html>
