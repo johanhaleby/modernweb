@@ -38,6 +38,7 @@ class Example4(private val userRepository: UserRepository) {
         return "example4/edit-user-form"
     }
 
+    @Suppress("SpringMVCViewInspection")
     @PutMapping("/{userId}")
     fun updateUser(model: Model,
                    @PathVariable("userId") id: String,
@@ -46,7 +47,8 @@ class Example4(private val userRepository: UserRepository) {
         val user = userDTO.toDomain(id)
         userRepository.save(user)
         model.addAttribute("message", "User $id updated")
-        return renderTable(model)
+        model.addAttribute("users", userRepository.findAll())
+        return "/example4/example4 :: user-management-fragment"
     }
 
     @Suppress("SpringMVCViewInspection")

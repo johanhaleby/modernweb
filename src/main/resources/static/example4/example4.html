@@ -1,13 +1,18 @@
 <!doctype html>
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/thymeleaf/layout.html}"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/layout">
+      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/layout http://www.thymeleaf.org">
 <head>
     <title>Example 4</title>
 <body>
 <section layout:fragment="content">
-    <th:block layout:insert="~{/example4/users}"/>
-    <th:block layout:insert="~{/example4/add-user}"/>
+    <th:block th:fragment="user-management-fragment">
+        <div id="user-management">
+            <th:block layout:insert="~{/example4/users(target='#user-management')}"/>
+            <th:block layout:insert="~{/example4/add-user-form(target='#users tbody')}"/>
+        </div>
+    </th:block>
 </section>
 </body>
 </html>
