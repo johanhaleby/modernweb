@@ -39,14 +39,13 @@ class Example4(private val userRepository: UserRepository) {
     }
 
     @PostMapping("/{userId}")
-    fun updateUser(redirectAttributes: RedirectAttributes,
-                   model: Model,
+    fun updateUser(model: Model,
                    @PathVariable("userId") id: String,
                    @ModelAttribute("user") userDTO: UserDTO): String {
         log.info("Updating user $id")
         val user = userDTO.toDomain(id)
         userRepository.save(user)
-        redirectAttributes.addFlashAttribute("message", "User $id updated")
+        model.addAttribute("message", "User $id updated")
         return renderTable(model)
     }
 
