@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/lab/layout.html}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/layout http://www.thymeleaf.org">
+<body>
+<section layout:fragment="content">
+    <div id="main">
+        <div th:if="${chatter == null}">
+            <th:block layout:insert="~{/lab/registration(target='#main')}"/>
+        </div>
+        <div th:if="${chatter != null}">
+            <th:block layout:insert="~{/lab/chatroom}"/>
+        </div>
+    </div>
+</section>
+</body>
+</html>

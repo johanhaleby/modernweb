@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout ">
     <head>
+        <title>Chat</title>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!--Bootstrap CSS-->
         <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
         <!--Bootstrap JS-->
@@ -16,7 +16,7 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/">Spring Boot Demo</a>
+                <a class="navbar-brand" href="/">Chat</a>
                 <p class="navbar-text">Rendered at <!--suppress ThymeleafVariablesResolveInspection --> <span th:text="${#dates.format(now, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
             </div>
         </nav>
@@ -32,5 +32,10 @@
         <section layout:fragment="content">
             <p>Page content goes here</p>
         </section>
+        <div th:fragment="footer">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                Thanks for chatting!
+            </nav>
+          </div>
     </body>
 </html>

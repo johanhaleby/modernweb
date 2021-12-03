@@ -1,0 +1,19 @@
+<th:block th:fragment="registration(target)">
+    <h1>Welcome to a chat room free of javascript!</h1>
+    <!--/*@thymesVar id="target" type="java.lang.String"*/-->
+    <form hx-post="/chat/registration" th:attr="hx-target=${target}" hx-swap="innerHTML">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-3"><label for="name">Enter your name to join chat</label></div>
+            </div>
+            <div class="row">
+                <div class="col-md-2"><input id="name" type="text" class="form-control" name="name" required minlength="2" maxlength="10"
+                                             placeholder="John Doe">
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-primary">Join</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</th:block>
