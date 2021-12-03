@@ -86,11 +86,9 @@ class Example5(private val userRepository: UserRepository) {
 
     @PostMapping("/search")
     fun search(@RequestParam("search") searchString: String): String =
-            userRepository.findAll()
-                    .filter { (_, firstName, lastName, email) ->
-                        sequenceOf(firstName, lastName, email).any { it.contains(searchString, ignoreCase = true) }
-                    }
-                    .joinToString("\n") { (_, firstName, lastName, email) ->
-                        "<tr><td>$firstName</td><td>$lastName</td><td>$email</td></tr>"
-                    }
+            userRepository.findAll().filter { (_, firstName, lastName, email) ->
+                sequenceOf(firstName, lastName, email).any { it.contains(searchString, ignoreCase = true) }
+            }.joinToString("\n") { (_, firstName, lastName, email) ->
+                "<tr><td>$firstName</td><td>$lastName</td><td>$email</td></tr>"
+            }
 }

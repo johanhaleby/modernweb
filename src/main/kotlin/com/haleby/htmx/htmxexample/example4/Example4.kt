@@ -40,9 +40,7 @@ class Example4(private val userRepository: UserRepository) {
 
     @Suppress("SpringMVCViewInspection")
     @PutMapping("/{userId}")
-    fun updateUser(model: Model,
-                   @PathVariable("userId") id: String,
-                   @ModelAttribute("user") userDTO: UserDTO): String {
+    fun updateUser(model: Model, @PathVariable("userId") id: String, @ModelAttribute("user") userDTO: UserDTO): String {
         log.info("Updating user $id")
         val user = userDTO.toDomain(id)
         userRepository.save(user)
