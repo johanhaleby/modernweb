@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicReference
 class ChatRoom {
     private val stateRef = AtomicReference(persistentMapOf<ChatterName, Chatter>())
 
-    val participants: List<Chatter>
+    val chatters: List<Chatter>
         get() = stateRef.get().values.toList()
 
     operator fun get(chatterName: ChatterName): Chatter? = stateRef.get()[chatterName]

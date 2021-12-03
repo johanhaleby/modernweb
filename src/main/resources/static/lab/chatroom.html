@@ -1,4 +1,17 @@
 <!doctype html>
 <div class="row">
     <h1>Welcome to the chat <span th:text="${chatter.name}">gfd</span></h1>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-12"><h3>People in Chat</h3></div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div hx-get="/chat/room/chatters" hx-trigger="load, every 2s" hx-swap="innerHTML">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
