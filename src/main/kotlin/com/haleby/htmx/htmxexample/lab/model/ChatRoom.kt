@@ -1,21 +1,33 @@
 package com.haleby.htmx.htmxexample.lab.model
 
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentMapOf
 import org.springframework.stereotype.Component
+import java.util.*
 import java.util.concurrent.atomic.AtomicReference
-
 
 @Component
 class ChatRoom {
-    private val stateRef = AtomicReference(persistentMapOf<ChatterName, Chatter>())
+    private val chattersState = AtomicReference(persistentMapOf<ChatterName, Chatter>())
+    private val messagesState = AtomicReference(persistentListOf<ChatMessage>())
 
     val chatters: List<Chatter>
-        get() = stateRef.get().values.toList()
+        get() = chattersState.get().values.toList()
 
-    operator fun get(chatterName: ChatterName): Chatter? = stateRef.get()[chatterName]
+    val messages: List<ChatMessage>
+        get() = messagesState.get().toList()
 
-    operator fun plus(chatter: Chatter): ChatRoom {
-        stateRef.updateAndGet { participants ->
+    operator fun get(chatterName: ChatterName): Chatter? = chattersState.get()[chatterName]
+
+    fun post(chatterName: ChatterName, message: Message): ChatRoom {
+        messagesState.updateAndGet { messages ->
+            messages.add(ChatMessage(chatterName, message))
+        }
+        return this
+    }
+
+    infix fun join(chatter: Chatter): ChatRoom {
+        chattersState.updateAndGet { participants ->
             participants.put(chatter.name, chatter)
         }
         return this
@@ -23,5 +35,9 @@ class ChatRoom {
 }
 
 infix fun Chatter.join(room: ChatRoom) {
-    room + this
+    room join this
 }
+
+typealias Message = String
+
+data class ChatMessage(val chatterName: ChatterName, val message: Message, val postedAt: Date = Date())
