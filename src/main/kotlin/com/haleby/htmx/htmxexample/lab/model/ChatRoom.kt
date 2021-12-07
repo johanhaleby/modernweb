@@ -19,11 +19,12 @@ class ChatRoom {
 
     operator fun get(chatterName: ChatterName): Chatter? = chattersState.get()[chatterName]
 
-    fun post(chatterName: ChatterName, message: Message): ChatRoom {
+    fun post(chatterName: ChatterName, message: Message): ChatMessage {
+        val chatMessage = ChatMessage(chatterName, message)
         messagesState.updateAndGet { messages ->
-            messages.add(ChatMessage(chatterName, message))
+            messages.add(chatMessage)
         }
-        return this
+        return chatMessage
     }
 
     infix fun join(chatter: Chatter): ChatRoom {

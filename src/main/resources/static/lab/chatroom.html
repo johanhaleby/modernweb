@@ -19,6 +19,18 @@
                     <div hx-get="/chat/room/messages" hx-trigger="load, every 2s" hx-swap="innerHTML">&nbsp;</div>
                 </div>
             </div>
+            <form hx-post="/chat/room/messages" hx-target="#messageTable" hx-swap="beforeend" _="on htmx:afterRequest reset() me">
+                <div class="row">
+                    <div class="col-md-1"><label class="control-label" for="messageInput">Message</label></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1"><input id="messageInput" name="message" class="form-control" type="text" required placeholder="Autogiro is bad"/>
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-primary" type="submit">Post</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
