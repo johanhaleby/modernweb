@@ -9,6 +9,10 @@ import org.springframework.http.MediaType
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.util.*
 import javax.servlet.http.HttpSession
 
 @RequestMapping(path = ["/chat/room"], produces = [MediaType.TEXT_HTML_VALUE])
@@ -39,13 +43,15 @@ class ChatRoomPage(private val chatRoom: ChatRoom) {
     private fun singleChatterMarkup(name: ChatterName, me: ChatterName) = """<tr><td><i class="bi bi-person"></i>&nbsp;$name${if (me == name) "&nbsp;(you)" else ""}</td></tr>"""
 
     @Language("html")
-    private fun singleChatMessageMarkup(chatMessage: ChatMessage) = """<tr><td>${chatMessage.postedAt}</td><td>${chatMessage.chatterName}</td><td>${chatMessage.message}</td></tr>"""
+    private fun singleChatMessageMarkup(chatMessage: ChatMessage) = """<tr><td>[${chatMessage.postedAt.formatted()}]&nbsp;${chatMessage.chatterName}:&nbsp;&nbsp;${chatMessage.message}</td></tr>"""
 
     companion object {
         @Language("html")
         private const val chattersTable = """<table class="table table-hover table-borderless ">%s</table>"""
 
         @Language("html")
-        private const val messagesTable = """<table id="messageTable" class="table table-hover table-borderless ">%s</table>"""
+        private const val messagesTable = """<table id="messageTable" class="table table-hover table-borderless "><tbody>%s</tbody></table>"""
+
+        private fun Date.formatted() = LocalDateTime.ofInstant(toInstant(), ZoneId.of("Europe/Stockholm")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
     }
 }

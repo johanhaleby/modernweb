@@ -19,7 +19,7 @@
                     <div hx-get="/chat/room/messages" hx-trigger="load, every 2s" hx-swap="innerHTML">&nbsp;</div>
                 </div>
             </div>
-            <form hx-post="/chat/room/messages" hx-target="#messageTable" hx-swap="beforeend" _="on htmx:afterRequest reset() me">
+            <form hx-post="/chat/room/messages" hx-target="#messageTable tbody" hx-swap="beforeend" _="on htmx:afterRequest reset() me">
                 <div class="row">
                     <div class="col-md-1"><label class="control-label" for="messageInput">Message</label></div>
                 </div>
