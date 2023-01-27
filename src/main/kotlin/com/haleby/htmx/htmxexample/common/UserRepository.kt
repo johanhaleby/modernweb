@@ -1,10 +1,10 @@
 package com.haleby.htmx.htmxexample.common
 
 import com.github.javafaker.Faker
+import jakarta.annotation.PostConstruct
 import org.springframework.stereotype.Component
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.ConcurrentMap
-import javax.annotation.PostConstruct
 
 @Component
 class UserRepository {

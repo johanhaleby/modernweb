@@ -4,6 +4,7 @@ import com.haleby.htmx.htmxexample.lab.model.ChatMessage
 import com.haleby.htmx.htmxexample.lab.model.ChatRoom
 import com.haleby.htmx.htmxexample.lab.model.ChatterName
 import com.haleby.htmx.htmxexample.lab.model.Message
+import jakarta.servlet.http.HttpSession
 import org.intellij.lang.annotations.Language
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Controller
@@ -13,7 +14,6 @@ import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.*
-import javax.servlet.http.HttpSession
 
 @RequestMapping(path = ["/chat/room"], produces = [MediaType.TEXT_HTML_VALUE])
 @Controller

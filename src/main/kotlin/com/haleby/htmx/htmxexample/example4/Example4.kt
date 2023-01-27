@@ -8,9 +8,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.servlet.mvc.support.RedirectAttributes
 import java.util.*
-import javax.annotation.PostConstruct
 
 @RequestMapping(path = ["/examples/4"], produces = [MediaType.TEXT_HTML_VALUE])
 @Controller

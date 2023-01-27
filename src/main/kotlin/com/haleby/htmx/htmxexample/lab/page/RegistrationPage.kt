@@ -3,12 +3,12 @@ package com.haleby.htmx.htmxexample.lab.page
 import com.haleby.htmx.htmxexample.lab.model.ChatRoom
 import com.haleby.htmx.htmxexample.lab.model.Chatter
 import com.haleby.htmx.htmxexample.lab.model.join
+import jakarta.servlet.http.HttpSession
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
 import java.util.*
-import javax.servlet.http.HttpSession
 
 
 @RequestMapping(path = ["/chat/registration"], produces = [MediaType.TEXT_HTML_VALUE])

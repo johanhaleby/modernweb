@@ -5,10 +5,8 @@ import kotlinx.html.*
 import kotlinx.html.ButtonType.button
 import kotlinx.html.InputType.text
 import kotlinx.html.stream.appendHTML
-import org.intellij.lang.annotations.Language
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
-import javax.annotation.PostConstruct
 
 @RequestMapping(path = ["/examples/5"], produces = [MediaType.TEXT_HTML_VALUE])
 @RestController
